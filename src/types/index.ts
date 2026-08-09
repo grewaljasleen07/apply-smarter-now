@@ -54,8 +54,8 @@ export type Suggestion = {
   area: string;
   severity: "high" | "medium" | "low";
   detail: string;
-  original?: string;
-  improved?: string;
+  original?: string | undefined;
+  improved?: string | undefined;
 };
 
 export type ApplicationStatus =
