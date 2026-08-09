@@ -401,7 +401,7 @@ function TrackerSection() {
   );
 }
 
-const benefits = [
+const benefits: [string, string][] = [
   ["Stop guessing", "See the fit before you apply, not after a rejection email."],
   ["Apply faster", "Tailoring a resume drops from an hour of editing to a few reviewed suggestions."],
   ["Learn as you go", "Recurring missing skills tell you what to build next."],
@@ -566,7 +566,7 @@ function RoadmapSection() {
   );
 }
 
-const faqs = [
+const faqs: [string, string][] = [
   [
     "Is the AI real in this version?",
     "Phase 1 runs on realistic simulated responses behind a service layer with the same shapes real models will return. Swapping in live models does not require rebuilding the interface.",
