@@ -17,9 +17,10 @@ export const resumeService = {
   },
 
   async upload(fileName: string): Promise<Resume> {
-    const base = resumes[0];
+    const base = resumes[0] ?? mockResumes[0]!;
     const created: Resume = {
       ...base,
+
       id: `r_${Date.now()}`,
       name: fileName.replace(/\.(pdf|docx?|txt)$/i, ""),
       fileName,
