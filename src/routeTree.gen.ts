@@ -15,6 +15,8 @@ import { Route as ShellRouteImport } from './routes/_shell'
 import { Route as AuthLoginRouteImport } from './routes/_auth.login'
 import { Route as AuthSignupRouteImport } from './routes/_auth.signup'
 import { Route as ShellAnalyzeRouteImport } from './routes/_shell.analyze'
+import { Route as ShellApplicationsRouteImport } from './routes/_shell.applications'
+import { Route as ShellCoverLetterRouteImport } from './routes/_shell.cover-letter'
 import { Route as ShellDashboardRouteImport } from './routes/_shell.dashboard'
 import { Route as ShellTailorRouteImport } from './routes/_shell.tailor'
 import { Route as ShellAnalysesIndexRouteImport } from './routes/_shell.analyses.index'
@@ -48,6 +50,16 @@ const AuthSignupRoute = AuthSignupRouteImport.update({
 const ShellAnalyzeRoute = ShellAnalyzeRouteImport.update({
   id: '/analyze',
   path: '/analyze',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellApplicationsRoute = ShellApplicationsRouteImport.update({
+  id: '/applications',
+  path: '/applications',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellCoverLetterRoute = ShellCoverLetterRouteImport.update({
+  id: '/cover-letter',
+  path: '/cover-letter',
   getParentRoute: () => ShellRoute,
 } as any)
 const ShellDashboardRoute = ShellDashboardRouteImport.update({
@@ -86,6 +98,8 @@ export interface FileRoutesByFullPath {
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
   '/analyze': typeof ShellAnalyzeRoute
+  '/applications': typeof ShellApplicationsRoute
+  '/cover-letter': typeof ShellCoverLetterRoute
   '/dashboard': typeof ShellDashboardRoute
   '/tailor': typeof ShellTailorRoute
   '/analyses/$analysisId': typeof ShellAnalysesAnalysisIdRoute
@@ -98,6 +112,8 @@ export interface FileRoutesByTo {
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
   '/analyze': typeof ShellAnalyzeRoute
+  '/applications': typeof ShellApplicationsRoute
+  '/cover-letter': typeof ShellCoverLetterRoute
   '/dashboard': typeof ShellDashboardRoute
   '/tailor': typeof ShellTailorRoute
   '/analyses/$analysisId': typeof ShellAnalysesAnalysisIdRoute
@@ -113,6 +129,8 @@ export interface FileRoutesById {
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/signup': typeof AuthSignupRoute
   '/_shell/analyze': typeof ShellAnalyzeRoute
+  '/_shell/applications': typeof ShellApplicationsRoute
+  '/_shell/cover-letter': typeof ShellCoverLetterRoute
   '/_shell/dashboard': typeof ShellDashboardRoute
   '/_shell/tailor': typeof ShellTailorRoute
   '/_shell/analyses/$analysisId': typeof ShellAnalysesAnalysisIdRoute
@@ -127,6 +145,8 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/analyze'
+    | '/applications'
+    | '/cover-letter'
     | '/dashboard'
     | '/tailor'
     | '/analyses/$analysisId'
@@ -139,6 +159,8 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/analyze'
+    | '/applications'
+    | '/cover-letter'
     | '/dashboard'
     | '/tailor'
     | '/analyses/$analysisId'
@@ -153,6 +175,8 @@ export interface FileRouteTypes {
     | '/_auth/login'
     | '/_auth/signup'
     | '/_shell/analyze'
+    | '/_shell/applications'
+    | '/_shell/cover-letter'
     | '/_shell/dashboard'
     | '/_shell/tailor'
     | '/_shell/analyses/$analysisId'
@@ -209,6 +233,20 @@ declare module '@tanstack/react-router' {
       path: '/analyze'
       fullPath: '/analyze'
       preLoaderRoute: typeof ShellAnalyzeRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/applications': {
+      id: '/_shell/applications'
+      path: '/applications'
+      fullPath: '/applications'
+      preLoaderRoute: typeof ShellApplicationsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/cover-letter': {
+      id: '/_shell/cover-letter'
+      path: '/cover-letter'
+      fullPath: '/cover-letter'
+      preLoaderRoute: typeof ShellCoverLetterRouteImport
       parentRoute: typeof ShellRoute
     }
     '/_shell/dashboard': {
@@ -270,6 +308,8 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface ShellRouteChildren {
   ShellAnalyzeRoute: typeof ShellAnalyzeRoute
+  ShellApplicationsRoute: typeof ShellApplicationsRoute
+  ShellCoverLetterRoute: typeof ShellCoverLetterRoute
   ShellDashboardRoute: typeof ShellDashboardRoute
   ShellTailorRoute: typeof ShellTailorRoute
   ShellAnalysesAnalysisIdRoute: typeof ShellAnalysesAnalysisIdRoute
@@ -280,6 +320,8 @@ interface ShellRouteChildren {
 
 const ShellRouteChildren: ShellRouteChildren = {
   ShellAnalyzeRoute: ShellAnalyzeRoute,
+  ShellApplicationsRoute: ShellApplicationsRoute,
+  ShellCoverLetterRoute: ShellCoverLetterRoute,
   ShellDashboardRoute: ShellDashboardRoute,
   ShellTailorRoute: ShellTailorRoute,
   ShellAnalysesAnalysisIdRoute: ShellAnalysesAnalysisIdRoute,
@@ -298,3 +340,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
