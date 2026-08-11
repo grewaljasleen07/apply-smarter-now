@@ -16,6 +16,7 @@ import { Route as AuthLoginRouteImport } from './routes/_auth.login'
 import { Route as AuthSignupRouteImport } from './routes/_auth.signup'
 import { Route as ShellDashboardRouteImport } from './routes/_shell.dashboard'
 import { Route as ShellResumesIndexRouteImport } from './routes/_shell.resumes.index'
+import { Route as ShellResumesResumeIdRouteImport } from './routes/_shell.resumes.$resumeId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -50,12 +51,18 @@ const ShellResumesIndexRoute = ShellResumesIndexRouteImport.update({
   path: '/resumes/',
   getParentRoute: () => ShellRoute,
 } as any)
+const ShellResumesResumeIdRoute = ShellResumesResumeIdRouteImport.update({
+  id: '/resumes/$resumeId',
+  path: '/resumes/$resumeId',
+  getParentRoute: () => ShellRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
   '/dashboard': typeof ShellDashboardRoute
+  '/resumes/$resumeId': typeof ShellResumesResumeIdRoute
   '/resumes/': typeof ShellResumesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -63,6 +70,7 @@ export interface FileRoutesByTo {
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
   '/dashboard': typeof ShellDashboardRoute
+  '/resumes/$resumeId': typeof ShellResumesResumeIdRoute
   '/resumes': typeof ShellResumesIndexRoute
 }
 export interface FileRoutesById {
@@ -73,13 +81,26 @@ export interface FileRoutesById {
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/signup': typeof AuthSignupRoute
   '/_shell/dashboard': typeof ShellDashboardRoute
+  '/_shell/resumes/$resumeId': typeof ShellResumesResumeIdRoute
   '/_shell/resumes/': typeof ShellResumesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/signup' | '/dashboard' | '/resumes/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/signup'
+    | '/dashboard'
+    | '/resumes/$resumeId'
+    | '/resumes/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/signup' | '/dashboard' | '/resumes'
+  to:
+    | '/'
+    | '/login'
+    | '/signup'
+    | '/dashboard'
+    | '/resumes/$resumeId'
+    | '/resumes'
   id:
     | '__root__'
     | '/'
@@ -88,6 +109,7 @@ export interface FileRouteTypes {
     | '/_auth/login'
     | '/_auth/signup'
     | '/_shell/dashboard'
+    | '/_shell/resumes/$resumeId'
     | '/_shell/resumes/'
   fileRoutesById: FileRoutesById
 }
@@ -148,6 +170,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellResumesIndexRouteImport
       parentRoute: typeof ShellRoute
     }
+    '/_shell/resumes/$resumeId': {
+      id: '/_shell/resumes/$resumeId'
+      path: '/resumes/$resumeId'
+      fullPath: '/resumes/$resumeId'
+      preLoaderRoute: typeof ShellResumesResumeIdRouteImport
+      parentRoute: typeof ShellRoute
+    }
   }
 }
 
@@ -165,11 +194,13 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface ShellRouteChildren {
   ShellDashboardRoute: typeof ShellDashboardRoute
+  ShellResumesResumeIdRoute: typeof ShellResumesResumeIdRoute
   ShellResumesIndexRoute: typeof ShellResumesIndexRoute
 }
 
 const ShellRouteChildren: ShellRouteChildren = {
   ShellDashboardRoute: ShellDashboardRoute,
+  ShellResumesResumeIdRoute: ShellResumesResumeIdRoute,
   ShellResumesIndexRoute: ShellResumesIndexRoute,
 }
 
