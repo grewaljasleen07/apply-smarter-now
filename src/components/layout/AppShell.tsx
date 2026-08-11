@@ -124,7 +124,7 @@ function SidebarBody({ pathname, onNavigate }: { pathname: string; onNavigate?: 
 
 function TopBar({ onMenu }: { onMenu: () => void }) {
   const { user, logout } = useAuth();
-  const { theme, setTheme } = useTheme();
+  const { resolved, setMode } = useTheme();
   const navigate = useNavigate();
   const { data: notifications = [] } = useNotifications();
   const unread = notifications.filter((n) => n.unread).length;
