@@ -10,33 +10,209 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthRouteImport } from './routes/_auth'
+import { Route as ShellRouteImport } from './routes/_shell'
+import { Route as AuthLoginRouteImport } from './routes/_auth.login'
+import { Route as AuthSignupRouteImport } from './routes/_auth.signup'
+import { Route as ShellAnalyzeRouteImport } from './routes/_shell.analyze'
+import { Route as ShellApplicationsRouteImport } from './routes/_shell.applications'
+import { Route as ShellCoverLetterRouteImport } from './routes/_shell.cover-letter'
+import { Route as ShellDashboardRouteImport } from './routes/_shell.dashboard'
+import { Route as ShellProfileRouteImport } from './routes/_shell.profile'
+import { Route as ShellSettingsRouteImport } from './routes/_shell.settings'
+import { Route as ShellTailorRouteImport } from './routes/_shell.tailor'
+import { Route as ShellAnalysesIndexRouteImport } from './routes/_shell.analyses.index'
+import { Route as ShellAnalysesAnalysisIdRouteImport } from './routes/_shell.analyses.$analysisId'
+import { Route as ShellResumesIndexRouteImport } from './routes/_shell.resumes.index'
+import { Route as ShellResumesResumeIdRouteImport } from './routes/_shell.resumes.$resumeId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/_auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShellRoute = ShellRouteImport.update({
+  id: '/_shell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthSignupRoute = AuthSignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => AuthRoute,
+} as any)
+const ShellAnalyzeRoute = ShellAnalyzeRouteImport.update({
+  id: '/analyze',
+  path: '/analyze',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellApplicationsRoute = ShellApplicationsRouteImport.update({
+  id: '/applications',
+  path: '/applications',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellCoverLetterRoute = ShellCoverLetterRouteImport.update({
+  id: '/cover-letter',
+  path: '/cover-letter',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellDashboardRoute = ShellDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellProfileRoute = ShellProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellSettingsRoute = ShellSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellTailorRoute = ShellTailorRouteImport.update({
+  id: '/tailor',
+  path: '/tailor',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellAnalysesIndexRoute = ShellAnalysesIndexRouteImport.update({
+  id: '/analyses/',
+  path: '/analyses/',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellAnalysesAnalysisIdRoute = ShellAnalysesAnalysisIdRouteImport.update({
+  id: '/analyses/$analysisId',
+  path: '/analyses/$analysisId',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellResumesIndexRoute = ShellResumesIndexRouteImport.update({
+  id: '/resumes/',
+  path: '/resumes/',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellResumesResumeIdRoute = ShellResumesResumeIdRouteImport.update({
+  id: '/resumes/$resumeId',
+  path: '/resumes/$resumeId',
+  getParentRoute: () => ShellRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login': typeof AuthLoginRoute
+  '/signup': typeof AuthSignupRoute
+  '/analyze': typeof ShellAnalyzeRoute
+  '/applications': typeof ShellApplicationsRoute
+  '/cover-letter': typeof ShellCoverLetterRoute
+  '/dashboard': typeof ShellDashboardRoute
+  '/profile': typeof ShellProfileRoute
+  '/settings': typeof ShellSettingsRoute
+  '/tailor': typeof ShellTailorRoute
+  '/analyses/$analysisId': typeof ShellAnalysesAnalysisIdRoute
+  '/resumes/$resumeId': typeof ShellResumesResumeIdRoute
+  '/analyses/': typeof ShellAnalysesIndexRoute
+  '/resumes/': typeof ShellResumesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof AuthLoginRoute
+  '/signup': typeof AuthSignupRoute
+  '/analyze': typeof ShellAnalyzeRoute
+  '/applications': typeof ShellApplicationsRoute
+  '/cover-letter': typeof ShellCoverLetterRoute
+  '/dashboard': typeof ShellDashboardRoute
+  '/profile': typeof ShellProfileRoute
+  '/settings': typeof ShellSettingsRoute
+  '/tailor': typeof ShellTailorRoute
+  '/analyses/$analysisId': typeof ShellAnalysesAnalysisIdRoute
+  '/resumes/$resumeId': typeof ShellResumesResumeIdRoute
+  '/analyses': typeof ShellAnalysesIndexRoute
+  '/resumes': typeof ShellResumesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_auth': typeof AuthRouteWithChildren
+  '/_shell': typeof ShellRouteWithChildren
+  '/_auth/login': typeof AuthLoginRoute
+  '/_auth/signup': typeof AuthSignupRoute
+  '/_shell/analyze': typeof ShellAnalyzeRoute
+  '/_shell/applications': typeof ShellApplicationsRoute
+  '/_shell/cover-letter': typeof ShellCoverLetterRoute
+  '/_shell/dashboard': typeof ShellDashboardRoute
+  '/_shell/profile': typeof ShellProfileRoute
+  '/_shell/settings': typeof ShellSettingsRoute
+  '/_shell/tailor': typeof ShellTailorRoute
+  '/_shell/analyses/$analysisId': typeof ShellAnalysesAnalysisIdRoute
+  '/_shell/resumes/$resumeId': typeof ShellResumesResumeIdRoute
+  '/_shell/analyses/': typeof ShellAnalysesIndexRoute
+  '/_shell/resumes/': typeof ShellResumesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/signup'
+    | '/analyze'
+    | '/applications'
+    | '/cover-letter'
+    | '/dashboard'
+    | '/profile'
+    | '/settings'
+    | '/tailor'
+    | '/analyses/$analysisId'
+    | '/resumes/$resumeId'
+    | '/analyses/'
+    | '/resumes/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/login'
+    | '/signup'
+    | '/analyze'
+    | '/applications'
+    | '/cover-letter'
+    | '/dashboard'
+    | '/profile'
+    | '/settings'
+    | '/tailor'
+    | '/analyses/$analysisId'
+    | '/resumes/$resumeId'
+    | '/analyses'
+    | '/resumes'
+  id:
+    | '__root__'
+    | '/'
+    | '/_auth'
+    | '/_shell'
+    | '/_auth/login'
+    | '/_auth/signup'
+    | '/_shell/analyze'
+    | '/_shell/applications'
+    | '/_shell/cover-letter'
+    | '/_shell/dashboard'
+    | '/_shell/profile'
+    | '/_shell/settings'
+    | '/_shell/tailor'
+    | '/_shell/analyses/$analysisId'
+    | '/_shell/resumes/$resumeId'
+    | '/_shell/analyses/'
+    | '/_shell/resumes/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRouteWithChildren
+  ShellRoute: typeof ShellRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +224,160 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_auth': {
+      id: '/_auth'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_shell': {
+      id: '/_shell'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof ShellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth/login': {
+      id: '/_auth/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/_auth/signup': {
+      id: '/_auth/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof AuthSignupRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/_shell/analyze': {
+      id: '/_shell/analyze'
+      path: '/analyze'
+      fullPath: '/analyze'
+      preLoaderRoute: typeof ShellAnalyzeRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/applications': {
+      id: '/_shell/applications'
+      path: '/applications'
+      fullPath: '/applications'
+      preLoaderRoute: typeof ShellApplicationsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/cover-letter': {
+      id: '/_shell/cover-letter'
+      path: '/cover-letter'
+      fullPath: '/cover-letter'
+      preLoaderRoute: typeof ShellCoverLetterRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/dashboard': {
+      id: '/_shell/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof ShellDashboardRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/profile': {
+      id: '/_shell/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ShellProfileRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/settings': {
+      id: '/_shell/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof ShellSettingsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/tailor': {
+      id: '/_shell/tailor'
+      path: '/tailor'
+      fullPath: '/tailor'
+      preLoaderRoute: typeof ShellTailorRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/analyses/': {
+      id: '/_shell/analyses/'
+      path: '/analyses'
+      fullPath: '/analyses/'
+      preLoaderRoute: typeof ShellAnalysesIndexRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/analyses/$analysisId': {
+      id: '/_shell/analyses/$analysisId'
+      path: '/analyses/$analysisId'
+      fullPath: '/analyses/$analysisId'
+      preLoaderRoute: typeof ShellAnalysesAnalysisIdRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/resumes/': {
+      id: '/_shell/resumes/'
+      path: '/resumes'
+      fullPath: '/resumes/'
+      preLoaderRoute: typeof ShellResumesIndexRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/resumes/$resumeId': {
+      id: '/_shell/resumes/$resumeId'
+      path: '/resumes/$resumeId'
+      fullPath: '/resumes/$resumeId'
+      preLoaderRoute: typeof ShellResumesResumeIdRouteImport
+      parentRoute: typeof ShellRoute
+    }
   }
 }
 
+interface AuthRouteChildren {
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthSignupRoute: typeof AuthSignupRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthLoginRoute: AuthLoginRoute,
+  AuthSignupRoute: AuthSignupRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
+interface ShellRouteChildren {
+  ShellAnalyzeRoute: typeof ShellAnalyzeRoute
+  ShellApplicationsRoute: typeof ShellApplicationsRoute
+  ShellCoverLetterRoute: typeof ShellCoverLetterRoute
+  ShellDashboardRoute: typeof ShellDashboardRoute
+  ShellProfileRoute: typeof ShellProfileRoute
+  ShellSettingsRoute: typeof ShellSettingsRoute
+  ShellTailorRoute: typeof ShellTailorRoute
+  ShellAnalysesAnalysisIdRoute: typeof ShellAnalysesAnalysisIdRoute
+  ShellResumesResumeIdRoute: typeof ShellResumesResumeIdRoute
+  ShellAnalysesIndexRoute: typeof ShellAnalysesIndexRoute
+  ShellResumesIndexRoute: typeof ShellResumesIndexRoute
+}
+
+const ShellRouteChildren: ShellRouteChildren = {
+  ShellAnalyzeRoute: ShellAnalyzeRoute,
+  ShellApplicationsRoute: ShellApplicationsRoute,
+  ShellCoverLetterRoute: ShellCoverLetterRoute,
+  ShellDashboardRoute: ShellDashboardRoute,
+  ShellProfileRoute: ShellProfileRoute,
+  ShellSettingsRoute: ShellSettingsRoute,
+  ShellTailorRoute: ShellTailorRoute,
+  ShellAnalysesAnalysisIdRoute: ShellAnalysesAnalysisIdRoute,
+  ShellResumesResumeIdRoute: ShellResumesResumeIdRoute,
+  ShellAnalysesIndexRoute: ShellAnalysesIndexRoute,
+  ShellResumesIndexRoute: ShellResumesIndexRoute,
+}
+
+const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRouteWithChildren,
+  ShellRoute: ShellRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
