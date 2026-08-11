@@ -14,6 +14,7 @@ import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as ShellRouteImport } from './routes/_shell'
 import { Route as AuthLoginRouteImport } from './routes/_auth.login'
 import { Route as AuthSignupRouteImport } from './routes/_auth.signup'
+import { Route as ShellAnalyzeRouteImport } from './routes/_shell.analyze'
 import { Route as ShellDashboardRouteImport } from './routes/_shell.dashboard'
 import { Route as ShellResumesIndexRouteImport } from './routes/_shell.resumes.index'
 import { Route as ShellResumesResumeIdRouteImport } from './routes/_shell.resumes.$resumeId'
@@ -41,6 +42,11 @@ const AuthSignupRoute = AuthSignupRouteImport.update({
   path: '/signup',
   getParentRoute: () => AuthRoute,
 } as any)
+const ShellAnalyzeRoute = ShellAnalyzeRouteImport.update({
+  id: '/analyze',
+  path: '/analyze',
+  getParentRoute: () => ShellRoute,
+} as any)
 const ShellDashboardRoute = ShellDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
+  '/analyze': typeof ShellAnalyzeRoute
   '/dashboard': typeof ShellDashboardRoute
   '/resumes/$resumeId': typeof ShellResumesResumeIdRoute
   '/resumes/': typeof ShellResumesIndexRoute
@@ -69,6 +76,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
+  '/analyze': typeof ShellAnalyzeRoute
   '/dashboard': typeof ShellDashboardRoute
   '/resumes/$resumeId': typeof ShellResumesResumeIdRoute
   '/resumes': typeof ShellResumesIndexRoute
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   '/_shell': typeof ShellRouteWithChildren
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/signup': typeof AuthSignupRoute
+  '/_shell/analyze': typeof ShellAnalyzeRoute
   '/_shell/dashboard': typeof ShellDashboardRoute
   '/_shell/resumes/$resumeId': typeof ShellResumesResumeIdRoute
   '/_shell/resumes/': typeof ShellResumesIndexRoute
@@ -90,6 +99,7 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/signup'
+    | '/analyze'
     | '/dashboard'
     | '/resumes/$resumeId'
     | '/resumes/'
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/signup'
+    | '/analyze'
     | '/dashboard'
     | '/resumes/$resumeId'
     | '/resumes'
@@ -108,6 +119,7 @@ export interface FileRouteTypes {
     | '/_shell'
     | '/_auth/login'
     | '/_auth/signup'
+    | '/_shell/analyze'
     | '/_shell/dashboard'
     | '/_shell/resumes/$resumeId'
     | '/_shell/resumes/'
@@ -156,6 +168,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthSignupRouteImport
       parentRoute: typeof AuthRoute
     }
+    '/_shell/analyze': {
+      id: '/_shell/analyze'
+      path: '/analyze'
+      fullPath: '/analyze'
+      preLoaderRoute: typeof ShellAnalyzeRouteImport
+      parentRoute: typeof ShellRoute
+    }
     '/_shell/dashboard': {
       id: '/_shell/dashboard'
       path: '/dashboard'
@@ -193,12 +212,14 @@ const AuthRouteChildren: AuthRouteChildren = {
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface ShellRouteChildren {
+  ShellAnalyzeRoute: typeof ShellAnalyzeRoute
   ShellDashboardRoute: typeof ShellDashboardRoute
   ShellResumesResumeIdRoute: typeof ShellResumesResumeIdRoute
   ShellResumesIndexRoute: typeof ShellResumesIndexRoute
 }
 
 const ShellRouteChildren: ShellRouteChildren = {
+  ShellAnalyzeRoute: ShellAnalyzeRoute,
   ShellDashboardRoute: ShellDashboardRoute,
   ShellResumesResumeIdRoute: ShellResumesResumeIdRoute,
   ShellResumesIndexRoute: ShellResumesIndexRoute,
