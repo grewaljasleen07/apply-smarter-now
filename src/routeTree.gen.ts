@@ -17,6 +17,7 @@ import { Route as AuthSignupRouteImport } from './routes/_auth.signup'
 import { Route as ShellAnalyzeRouteImport } from './routes/_shell.analyze'
 import { Route as ShellDashboardRouteImport } from './routes/_shell.dashboard'
 import { Route as ShellAnalysesIndexRouteImport } from './routes/_shell.analyses.index'
+import { Route as ShellAnalysesAnalysisIdRouteImport } from './routes/_shell.analyses.$analysisId'
 import { Route as ShellResumesIndexRouteImport } from './routes/_shell.resumes.index'
 import { Route as ShellResumesResumeIdRouteImport } from './routes/_shell.resumes.$resumeId'
 
@@ -58,6 +59,11 @@ const ShellAnalysesIndexRoute = ShellAnalysesIndexRouteImport.update({
   path: '/analyses/',
   getParentRoute: () => ShellRoute,
 } as any)
+const ShellAnalysesAnalysisIdRoute = ShellAnalysesAnalysisIdRouteImport.update({
+  id: '/analyses/$analysisId',
+  path: '/analyses/$analysisId',
+  getParentRoute: () => ShellRoute,
+} as any)
 const ShellResumesIndexRoute = ShellResumesIndexRouteImport.update({
   id: '/resumes/',
   path: '/resumes/',
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof AuthSignupRoute
   '/analyze': typeof ShellAnalyzeRoute
   '/dashboard': typeof ShellDashboardRoute
+  '/analyses/$analysisId': typeof ShellAnalysesAnalysisIdRoute
   '/resumes/$resumeId': typeof ShellResumesResumeIdRoute
   '/analyses/': typeof ShellAnalysesIndexRoute
   '/resumes/': typeof ShellResumesIndexRoute
@@ -85,6 +92,7 @@ export interface FileRoutesByTo {
   '/signup': typeof AuthSignupRoute
   '/analyze': typeof ShellAnalyzeRoute
   '/dashboard': typeof ShellDashboardRoute
+  '/analyses/$analysisId': typeof ShellAnalysesAnalysisIdRoute
   '/resumes/$resumeId': typeof ShellResumesResumeIdRoute
   '/analyses': typeof ShellAnalysesIndexRoute
   '/resumes': typeof ShellResumesIndexRoute
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/_auth/signup': typeof AuthSignupRoute
   '/_shell/analyze': typeof ShellAnalyzeRoute
   '/_shell/dashboard': typeof ShellDashboardRoute
+  '/_shell/analyses/$analysisId': typeof ShellAnalysesAnalysisIdRoute
   '/_shell/resumes/$resumeId': typeof ShellResumesResumeIdRoute
   '/_shell/analyses/': typeof ShellAnalysesIndexRoute
   '/_shell/resumes/': typeof ShellResumesIndexRoute
@@ -110,6 +119,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/analyze'
     | '/dashboard'
+    | '/analyses/$analysisId'
     | '/resumes/$resumeId'
     | '/analyses/'
     | '/resumes/'
@@ -120,6 +130,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/analyze'
     | '/dashboard'
+    | '/analyses/$analysisId'
     | '/resumes/$resumeId'
     | '/analyses'
     | '/resumes'
@@ -132,6 +143,7 @@ export interface FileRouteTypes {
     | '/_auth/signup'
     | '/_shell/analyze'
     | '/_shell/dashboard'
+    | '/_shell/analyses/$analysisId'
     | '/_shell/resumes/$resumeId'
     | '/_shell/analyses/'
     | '/_shell/resumes/'
@@ -201,6 +213,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellAnalysesIndexRouteImport
       parentRoute: typeof ShellRoute
     }
+    '/_shell/analyses/$analysisId': {
+      id: '/_shell/analyses/$analysisId'
+      path: '/analyses/$analysisId'
+      fullPath: '/analyses/$analysisId'
+      preLoaderRoute: typeof ShellAnalysesAnalysisIdRouteImport
+      parentRoute: typeof ShellRoute
+    }
     '/_shell/resumes/': {
       id: '/_shell/resumes/'
       path: '/resumes'
@@ -233,6 +252,7 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 interface ShellRouteChildren {
   ShellAnalyzeRoute: typeof ShellAnalyzeRoute
   ShellDashboardRoute: typeof ShellDashboardRoute
+  ShellAnalysesAnalysisIdRoute: typeof ShellAnalysesAnalysisIdRoute
   ShellResumesResumeIdRoute: typeof ShellResumesResumeIdRoute
   ShellAnalysesIndexRoute: typeof ShellAnalysesIndexRoute
   ShellResumesIndexRoute: typeof ShellResumesIndexRoute
@@ -241,6 +261,7 @@ interface ShellRouteChildren {
 const ShellRouteChildren: ShellRouteChildren = {
   ShellAnalyzeRoute: ShellAnalyzeRoute,
   ShellDashboardRoute: ShellDashboardRoute,
+  ShellAnalysesAnalysisIdRoute: ShellAnalysesAnalysisIdRoute,
   ShellResumesResumeIdRoute: ShellResumesResumeIdRoute,
   ShellAnalysesIndexRoute: ShellAnalysesIndexRoute,
   ShellResumesIndexRoute: ShellResumesIndexRoute,
