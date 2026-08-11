@@ -16,6 +16,7 @@ import { Route as AuthLoginRouteImport } from './routes/_auth.login'
 import { Route as AuthSignupRouteImport } from './routes/_auth.signup'
 import { Route as ShellAnalyzeRouteImport } from './routes/_shell.analyze'
 import { Route as ShellDashboardRouteImport } from './routes/_shell.dashboard'
+import { Route as ShellAnalysesIndexRouteImport } from './routes/_shell.analyses.index'
 import { Route as ShellResumesIndexRouteImport } from './routes/_shell.resumes.index'
 import { Route as ShellResumesResumeIdRouteImport } from './routes/_shell.resumes.$resumeId'
 
@@ -52,6 +53,11 @@ const ShellDashboardRoute = ShellDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => ShellRoute,
 } as any)
+const ShellAnalysesIndexRoute = ShellAnalysesIndexRouteImport.update({
+  id: '/analyses/',
+  path: '/analyses/',
+  getParentRoute: () => ShellRoute,
+} as any)
 const ShellResumesIndexRoute = ShellResumesIndexRouteImport.update({
   id: '/resumes/',
   path: '/resumes/',
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/analyze': typeof ShellAnalyzeRoute
   '/dashboard': typeof ShellDashboardRoute
   '/resumes/$resumeId': typeof ShellResumesResumeIdRoute
+  '/analyses/': typeof ShellAnalysesIndexRoute
   '/resumes/': typeof ShellResumesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -79,6 +86,7 @@ export interface FileRoutesByTo {
   '/analyze': typeof ShellAnalyzeRoute
   '/dashboard': typeof ShellDashboardRoute
   '/resumes/$resumeId': typeof ShellResumesResumeIdRoute
+  '/analyses': typeof ShellAnalysesIndexRoute
   '/resumes': typeof ShellResumesIndexRoute
 }
 export interface FileRoutesById {
@@ -91,6 +99,7 @@ export interface FileRoutesById {
   '/_shell/analyze': typeof ShellAnalyzeRoute
   '/_shell/dashboard': typeof ShellDashboardRoute
   '/_shell/resumes/$resumeId': typeof ShellResumesResumeIdRoute
+  '/_shell/analyses/': typeof ShellAnalysesIndexRoute
   '/_shell/resumes/': typeof ShellResumesIndexRoute
 }
 export interface FileRouteTypes {
@@ -102,6 +111,7 @@ export interface FileRouteTypes {
     | '/analyze'
     | '/dashboard'
     | '/resumes/$resumeId'
+    | '/analyses/'
     | '/resumes/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -111,6 +121,7 @@ export interface FileRouteTypes {
     | '/analyze'
     | '/dashboard'
     | '/resumes/$resumeId'
+    | '/analyses'
     | '/resumes'
   id:
     | '__root__'
@@ -122,6 +133,7 @@ export interface FileRouteTypes {
     | '/_shell/analyze'
     | '/_shell/dashboard'
     | '/_shell/resumes/$resumeId'
+    | '/_shell/analyses/'
     | '/_shell/resumes/'
   fileRoutesById: FileRoutesById
 }
@@ -182,6 +194,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellDashboardRouteImport
       parentRoute: typeof ShellRoute
     }
+    '/_shell/analyses/': {
+      id: '/_shell/analyses/'
+      path: '/analyses'
+      fullPath: '/analyses/'
+      preLoaderRoute: typeof ShellAnalysesIndexRouteImport
+      parentRoute: typeof ShellRoute
+    }
     '/_shell/resumes/': {
       id: '/_shell/resumes/'
       path: '/resumes'
@@ -215,6 +234,7 @@ interface ShellRouteChildren {
   ShellAnalyzeRoute: typeof ShellAnalyzeRoute
   ShellDashboardRoute: typeof ShellDashboardRoute
   ShellResumesResumeIdRoute: typeof ShellResumesResumeIdRoute
+  ShellAnalysesIndexRoute: typeof ShellAnalysesIndexRoute
   ShellResumesIndexRoute: typeof ShellResumesIndexRoute
 }
 
@@ -222,6 +242,7 @@ const ShellRouteChildren: ShellRouteChildren = {
   ShellAnalyzeRoute: ShellAnalyzeRoute,
   ShellDashboardRoute: ShellDashboardRoute,
   ShellResumesResumeIdRoute: ShellResumesResumeIdRoute,
+  ShellAnalysesIndexRoute: ShellAnalysesIndexRoute,
   ShellResumesIndexRoute: ShellResumesIndexRoute,
 }
 
