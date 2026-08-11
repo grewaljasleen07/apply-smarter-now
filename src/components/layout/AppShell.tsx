@@ -184,10 +184,11 @@ function TopBar({ onMenu }: { onMenu: () => void }) {
 
         <button
           className="grid size-9 place-items-center rounded-md border border-border"
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          onClick={() => setMode(resolved === "dark" ? "light" : "dark")}
           aria-label="Toggle theme"
         >
-          {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
+          {resolved === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
+
         </button>
 
         <DropdownMenu>
