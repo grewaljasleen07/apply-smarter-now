@@ -9,11 +9,8 @@ export const resumeService = {
     return ok(resumes, 500);
   },
 
-  async get(id: string): Promise<Resume | undefined> {
-    return ok(
-      resumes.find((r) => r.id === id),
-      400,
-    );
+  async get(id: string): Promise<Resume | null> {
+    return ok(resumes.find((r) => r.id === id) ?? null, 400);
   },
 
   async upload(fileName: string): Promise<Resume> {
